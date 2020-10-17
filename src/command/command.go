@@ -5,16 +5,19 @@ import (
 	"io"
 	"io/ioutil"
 	"regexp"
+	"../repository"
 )
 
+const CONFIG_PATH string = "./chc.config"
+
 func CopyHistoryDB() {
-	_, err := os.Stat("./History")
+	_, err := os.Stat(repository.LATEST_DB_PATH)
 	if err == nil {
-		os.Remove("./History")
+		os.Remove(repository.LATEST_DB_PATH)
 	}
 
 	// open db file
-	path, err := ioutil.ReadFile("./chc.config")
+	path, err := ioutil.ReadFile(CONFIG_PATH)
 	if err != nil {
         panic(err)
 	}
@@ -28,7 +31,7 @@ func CopyHistoryDB() {
 	defer src.Close()
 	
 	// create empty file
-	dest, err := os.Create("./History")
+	dest, err := os.Create(repository.LATEST_DB_PATH)
 	if err != nil {
         panic(dest)
     }
