@@ -2,22 +2,30 @@
 
 ただchrome履歴を出力するためだけのコマンドです。
 
-- title
-- url
-- timestamp
+- ページタイトル
+- URL
+- 訪問日時
 
 がtsv形式で出力されます
 
-# environment
+# Prerequisites
 
-- OS
-    - linux
-- dependency
-    - chrome
-    - golang
-    - bash
+下記以上のバージョンであれば基本問題ないはず
 
-# Setup
+```
+# Google Chrome
+81.0.4044.138 (Official Build) （64 ビット）
+
+# Golang
+$ go version
+go version go1.14.2 linux/amd64
+
+# Bash
+$ sh --version
+GNU bash, バージョン 5.0.16(1)-release (x86_64-pc-linux-gnu)
+```
+
+# Getting Started
 
 ```
 git clone https://github.com/punkrou404/chrome-history-catcher.git
@@ -31,5 +39,5 @@ sh ./init.sh
 
 ```
 # "www.sejuku.net"以外の履歴を見たい時
-chc | grep -v www.sejuku.net > without.sehuku.history.list
+chc | grep -v www.sejuku.net | less
 ```
