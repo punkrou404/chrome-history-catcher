@@ -18,7 +18,7 @@ if [ -z $input ] ; then
 elif [ -e "$input/History" ] ; then
     # succeed
     echo $input/History > chc.config
-    sed -i '/^$/d' chc.config
+    echo "" >> chc.config
     echo "いいんじゃないか？"
     echo "Enter押したらSetupするぞ"
     read Wait
