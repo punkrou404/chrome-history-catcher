@@ -1,12 +1,13 @@
 package repository
 
 import (
+	"os"
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"fmt"
 )
 
-const LATEST_DB_PATH string = "./History"
+var LATEST_DB_PATH string = os.Getenv("HOME") + "/.chc/History"
 const DELIMITER = "\t"
 
 type TrashScanner struct{}

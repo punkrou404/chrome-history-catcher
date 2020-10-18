@@ -8,7 +8,7 @@ import (
 	"../repository"
 )
 
-const CONFIG_PATH string = "./chc.config"
+var CONFIG_PATH string = os.Getenv("HOME") + "/.chc/chc.config"
 
 func CopyHistoryDB() {
 	_, err := os.Stat(repository.LATEST_DB_PATH)

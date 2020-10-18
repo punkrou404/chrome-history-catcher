@@ -11,14 +11,22 @@ echo "----------------------------"
 echo ""
 read -p "ここにペーストしてください: " input
 
-if [ -z $input ] ; then
+if [ -z "$input" ] ; then
     # undefined error
     echo "なにも入力していないじゃないか？"
 
 elif [ -e "$input/History" ] ; then
     # succeed
-    echo $input/History > chc.config
-    echo "" >> chc.config
+    if [ ! -d "$HOME/.chc" ] ; then
+        mkdir $HOME/.chc
+        echo "Start the initial setup."
+    else
+        rm -rf $HOME/.chc
+        mkdir $HOME/.chc
+        echo "Start the initial re-setup."
+    fi
+    echo $input/History | sudo tee $HOME/.chc/chc.config
+    echo "" | sudo tee -a $HOME/.chc/chc.config
     echo "いいんじゃないか？"
     echo "Enter押したらSetupするぞ"
     read Wait
