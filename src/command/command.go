@@ -5,33 +5,30 @@ import (
 	"io"
 	"io/ioutil"
 	"regexp"
-	"../repository"
 )
 
-var CONFIG_PATH string = os.Getenv("HOME") + "/.chc/chc.config"
-
-func CopyHistoryDB() {
-	_, err := os.Stat(repository.LATEST_DB_PATH)
+func CopyHistoryDB(copiedDBPath string, configPath string) {
+	_, err := os.Stat(copiedDBPath)
 	if err == nil {
-		os.Remove(repository.LATEST_DB_PATH)
+		os.Remove(copiedDBPath)
 	}
 
 	// open db file
-	path, err := ioutil.ReadFile(CONFIG_PATH)
+	path, err := ioutil.ReadFile(configPath)
 	if err != nil {
         panic(err)
 	}
 
 	// open db file
-	dbPath := regexp.MustCompile(`(?m)^\s*$[\r\n]*|[\r\n]+\s+\z`).ReplaceAllString(string(path), "")
-	src, err := os.Open(dbPath)
+	srcDBPath := regexp.MustCompile(`(?m)^\s*$[\r\n]*|[\r\n]+\s+\z`).ReplaceAllString(string(path), "")
+	src, err := os.Open(srcDBPath)
 	if err != nil {
         panic(err)
     }
 	defer src.Close()
 	
 	// create empty file
-	dest, err := os.Create(repository.LATEST_DB_PATH)
+	dest, err := os.Create(copiedDBPath)
 	if err != nil {
         panic(dest)
     }

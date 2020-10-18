@@ -1,14 +1,10 @@
 package repository
 
 import (
-	"os"
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
 	"fmt"
 )
-
-var LATEST_DB_PATH string = os.Getenv("HOME") + "/.chc/History"
-const DELIMITER = "\t"
 
 type TrashScanner struct{}
 
@@ -24,8 +20,8 @@ type History struct {
 	date string
 }
 
-func GetHistory() {
-	DbConnection, _ := sql.Open("sqlite3", LATEST_DB_PATH)
+func GetHistory(DBPath string) []History {
+	DbConnection, _ := sql.Open("sqlite3", DBPath)
 	cmd := `
 	select 
 	urls.id,
