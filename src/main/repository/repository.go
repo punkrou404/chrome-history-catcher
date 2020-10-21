@@ -20,7 +20,7 @@ type History struct {
 	date string
 }
 
-func GetHistory(DBPath string) []History {
+func GetHistory(DBPath string) {
 	DbConnection, _ := sql.Open("sqlite3", DBPath)
 	cmd := `
 	select 
@@ -56,6 +56,7 @@ func GetHistory(DBPath string) []History {
 	}
 	defer rows.Close()
 
+	const DELIMITER string = "\t"
 	for _, h := range history {
 		fmt.Println(h.title + DELIMITER + h.url + DELIMITER + h.date)
 	}
