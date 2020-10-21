@@ -20,7 +20,7 @@ type History struct {
 	date string
 }
 
-func GetHistory(DBPath string) {
+func GetHistory(DBPath string) error {
 	DbConnection, _ := sql.Open("sqlite3", DBPath)
 	cmd := `
 	select 
@@ -36,7 +36,7 @@ func GetHistory(DBPath string) {
 
 	rows, _  := DbConnection.Query(cmd)
 	if rows == nil {
-		panic("Query failed.: RE-001")
+		return fmt.Errorf("err %s", "Query failed.: RE-001")
 	}
 	
 	// データ取得
@@ -50,7 +50,7 @@ func GetHistory(DBPath string) {
 			&h.url,
 		)
 		if err != nil {
-		fmt.Println(err)
+			return err
 		}
 		history = append(history, h)
 	}
@@ -60,4 +60,6 @@ func GetHistory(DBPath string) {
 	for _, h := range history {
 		fmt.Println(h.title + DELIMITER + h.url + DELIMITER + h.date)
 	}
+
+	return nil
 }

@@ -5,3 +5,8 @@ build:
 	mv main chc
 deploy:
 	sudo cp chc /usr/local/bin/
+test:
+	go test -v -cover ./...
+test-cover:
+	go test -coverprofile=c.out
+	go tool cover -func=c.out
