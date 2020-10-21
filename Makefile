@@ -1,4 +1,4 @@
-all: build deploy
+all: test build deploy
 build:
 	go get -v github.com/mattn/go-sqlite3
 	go build src/main/main.go
@@ -8,5 +8,5 @@ deploy:
 test:
 	go test -v -cover ./...
 test-cover:
-	go test -coverprofile=c.out
+	go test -coverprofile=c.out ./...
 	go tool cover -func=c.out
