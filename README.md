@@ -28,11 +28,12 @@ GNU bash, バージョン 5.0.16(1)-release (x86_64-pc-linux-gnu)
 # Getting Started
 
 ```
-git clone https://github.com/punkrou404/chrome-history-catcher.git
-cd chrome-history-catcher
-sh ./init.sh 
+$ git clone https://github.com/punkrou404/chrome-history-catcher.git
+$ cd chrome-history-catcher
+$ sh ./init.sh 
 # 以降はウィザードに従ってセットアップしてください。
-# /usr/local/bin/chc に構築されます
+$ which chc
+/usr/local/bin/chc
 ```
 
 # Usecase
