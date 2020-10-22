@@ -13,22 +13,21 @@ read -p "ここにペーストしてください: " input
 
 if [ -z "$input" ] ; then
     # undefined error
-    echo "なにも入力していないじゃないか？"
+    echo "[ERROR]未入力です。やり直してください。"
 
 elif [ -e "$input/History" ] ; then
     # succeed
     if [ ! -d "$HOME/.chc" ] ; then
         mkdir $HOME/.chc
-        echo "Start the initial setup."
+        echo "セットアップ開始..."
     else
         rm -rf $HOME/.chc
         mkdir $HOME/.chc
-        echo "Start the initial re-setup."
+        echo "再セットアップ開始..."
     fi
     echo $input/History | sudo tee $HOME/.chc/chc.config
     echo "" | sudo tee -a $HOME/.chc/chc.config
-    echo "いいんじゃないか？"
-    echo "Enter押したらSetupするぞ"
+    echo "[Enter]押したらセットアップ開始"
     read Wait
 
     # setup
@@ -36,8 +35,7 @@ elif [ -e "$input/History" ] ; then
     
 else 
     # validation error
-    echo "ほんとにお前が入力したものはあってるか？"
-    echo "一度見直して出直してこい"
+    echo "[ERROR]Chrome指定のパスではない可能性があります。やり直してください。"
     echo $input
 
 fi
