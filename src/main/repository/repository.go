@@ -2,22 +2,22 @@ package repository
 
 import (
 	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
 	"fmt"
+	_ "github.com/mattn/go-sqlite3"
 )
 
 type TrashScanner struct{}
 
 func (TrashScanner) Scan(interface{}) error {
-    return nil
+	return nil
 }
 
 var DbConnection *sql.DB
 
 type History struct {
-    url string
+	url   string
 	title string
-	date string
+	date  string
 }
 
 func GetHistory(DBPath string) error {
@@ -34,11 +34,11 @@ func GetHistory(DBPath string) error {
 	order by visits.id desc;
 	`
 
-	rows, _  := DbConnection.Query(cmd)
+	rows, _ := DbConnection.Query(cmd)
 	if rows == nil {
 		return fmt.Errorf("err %s", "Query failed.: RE-001")
 	}
-	
+
 	// データ取得
 	var history []History
 	for rows.Next() {
@@ -46,7 +46,7 @@ func GetHistory(DBPath string) error {
 		err := rows.Scan(
 			TrashScanner{},
 			&h.date,
-			&h.title, 
+			&h.title,
 			&h.url,
 		)
 		if err != nil {

@@ -1,12 +1,11 @@
- 
 package main
 
 import (
-	"os"
+	"./command"
+	"./repository"
 	"flag"
 	"fmt"
-	"./repository"
-	"./command"
+	"os"
 )
 
 /**
